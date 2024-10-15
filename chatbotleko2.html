@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+    <title>심리상담 챗봇 레코</title>
+</html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>심리 상담 챗봇 레코</title>
+    <style>
+        /* 이전 스타일 유지 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e8f5fe;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .chat-container {
+            width: 400px;
+            height: 600px;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        <img src="leko.jpg" alt="장식 이미지" class="decorative-image">
+        .chat-header {
+            background-color: #007acc;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .chat-box {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: white;
+            border-radius: 0 0 10px 10px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .message-container {
+            display: flex;
+            align-items: flex-start;
+            margin: 10px 0;
+        }
+        .message-container.user {
+            justify-content: flex-end; /* 사용자 메시지를 오른쪽으로 */
+        }
+        .message-container.bot {
+            justify-content: flex-start; /* 봇 메시지를 왼쪽으로 */
+        }
+        .user-message {
+            text-align: right;
+            font-size: 14px;
+            color: white;
+            background-color: #007acc;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            max-width: 70%;
+            animation: fadeInRight 0.5s;
+        }
+        .bot-message {
+            text-align: left;
+            font-size: 14px;
+            color: black;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            max-width: 70%;
+            animation: fadeInLeft 0.5s;
+        }
+        .bot-message img {
+            width: 30px; 
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .input-container {
+            display: flex;
+            padding: 10px;
+            background-color: #007acc;
+            border-radius: 0 0 10px 10px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            font-size: 14px;
+        }
+        button {
+            width: 20%;
+            padding: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style> 
+         
+            <div class="message-container bot">
+                <img src="leko.jpg" alt="고양이 이미지">
+                
+            </div>
+        
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">심리 상담 챗봇 레코</div>
+        <div class="chat-box" id="chat-box"></div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="메시지를 입력하세요..." />
+            <button onclick="sendMessage()">전송</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById("user-input");
+            const chatBox = document.getElementById("chat-box");
+            const userMessage = input.value.trim();
+
+            if (userMessage === "") return; // 빈 메시지는 무시
+
+            // 사용자 메시지 추가 (오른쪽 정렬)
+            chatBox.innerHTML += `<div class="message-container user">
+                <div class="user-message"><strong>나:</strong> ${userMessage}</div>
+            </div>`;
+            input.value = ""; // 입력창 비우기
+
+            // 봇 응답 생성
+            const botResponse = generateResponse(userMessage.toLowerCase());
+            
+            // 봇 응답 메시지에 고양이 이미지 추가 (왼쪽 정렬)
+            chatBox.innerHTML += `
+                <div class="message-container bot">
+                    <img src="leko2.jpg" alt="고양이 이미지">
+                    <div class="bot-message"><strong>레코:</strong> ${botResponse}</div>
+                </div>`;
+            chatBox.scrollTop = chatBox.scrollHeight; // 스크롤 자동으로 내리기
+        }
+
+        function generateResponse(message) {
+            const responses = {
+                greeting: [
+                    "안녕하세요! 오늘 기분은 어떠신가요?",
+                    "안녕하세요! 어떤 이야기를 나눌까요?",
+                    "안녕하세요! 무엇이든 이야기해 주세요!"
+                ],
+                sadness: [
+                    "힘든 감정을 느끼고 계시군요. 더 이야기해 주실 수 있나요?",
+                    "슬픔이 느껴지는군요. 어떻게 도와드릴까요?",
+                    "이해합니다. 당신의 감정을 더 듣고 싶어요."
+                ],
+                happiness: [
+                    "기쁘게 느끼신다니 정말 좋네요! 더 들려주시겠어요?",
+                    "행복한 소식이군요! 함께 나누고 싶어요!",
+                    "좋은 기분을 나눠주셔서 감사합니다!"
+                ],
+                default: [
+                    "더 이야기를 듣고 싶습니다. 어떤 일이 있었나요?",
+                    "무슨 일이든 이야기해 보세요. 저는 들어줄 준비가 되어 있어요."
+                ]
+            };
+
+            // 인사 관련 키워드
+            if (message.includes("안녕") || message.includes("안녕하세요") || message.includes("반가워")) {
+                return getRandomResponse(responses.greeting);
+            }
+
+            // 슬픔과 관련된 키워드
+            if (message.includes("슬퍼") || message.includes("눈물") || message.includes("힘들어") || message.includes("고통스러워") || message.includes("아파")) {
+                return getRandomResponse(responses.sadness);
+            }
+
+            // 긍정적인 표현에 대한 응답
+            if (message.includes("행복해") || message.includes("기뻐") || message.includes("좋아")) {
+                return getRandomResponse(responses.happiness);
+            }
+
+            // 기본 응답
+            return getRandomResponse(responses.default);
+        }
+
+        function getRandomResponse(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        // 엔터 키로 메시지 전송 기능 추가
+        document.getElementById("user-input").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+                event.preventDefault(); // 엔터키 기본 동작 방지
+            }
+        });
+    </script>
+</body>
+</html>
