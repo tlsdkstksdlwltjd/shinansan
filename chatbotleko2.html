@@ -198,7 +198,12 @@
                 default: [
                     "더 이야기를 듣고 싶습니다. 어떤 일이 있었나요?",
                     "무슨 일이든 이야기해 보세요. 저는 들어줄 준비가 되어 있어요."
-                ]
+                    
+                ],
+                greeting2: [
+                    "게이야.."
+                   
+            
             };
 
             // 인사 관련 키워드
@@ -214,6 +219,11 @@
             // 긍정적인 표현에 대한 응답
             if (message.includes("행복해") || message.includes("기뻐") || message.includes("좋아")) {
                 return getRandomResponse(responses.happiness);
+            }
+            
+            if (message.includes("노무현") || message.includes("이기") || message.includes("운지")) {
+                return getRandomResponse(responses.happiness);
+            
             }
 
             // 기본 응답
